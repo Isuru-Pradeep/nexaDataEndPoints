@@ -2,6 +2,7 @@ package com.example.nexa.repo;
 
 import com.example.nexa.entity.ColorPallet;
 import com.example.nexa.entity.Generate;
+import com.example.nexa.entity.InteriorImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,4 +15,7 @@ public interface ColorPalletRepo extends JpaRepository<ColorPallet,String> {
 
 //    List<ColorPallet> findByImagecolor_pallet_id(int id);
     List<ColorPallet> findByImageColorPalletId(int imageColorPalletId);
+
+
+    List<ColorPallet> findByEmail(String email);
 }

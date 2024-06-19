@@ -2,6 +2,7 @@ package com.example.nexa.controller;
 
 import com.example.nexa.dto.HistoryDTO;
 import com.example.nexa.repo.ClientRepo;
+import com.example.nexa.repo.ColorPalletRepo;
 import com.example.nexa.repo.GenerateRepo;
 import com.example.nexa.repo.InteriorImageRepo;
 import com.example.nexa.service.HistoryService;
@@ -24,6 +25,8 @@ public class HistoryController {
     @Autowired
     private GenerateRepo generateRepo;
 
+    @Autowired
+    private ColorPalletRepo colorPalletRepo;
     @GetMapping("/{email}")
     public ResponseEntity<List<HistoryDTO>> getHistory(@PathVariable String email) {
         List<HistoryDTO> images = historyService.getHistory(email);
@@ -35,10 +38,9 @@ public class HistoryController {
     @DeleteMapping("{email}")
     public ResponseEntity<Void> clearHistory(@PathVariable String email) {
         if (clientRepo.existsById(email)) {
-//            interiorImageRepo.deleteAll(interiorImageRepo.findByClientEmail(email));
-//            generateRepo.deleteAll(generateRepo.findByEmail(email));
-//            meh tika comment karala thiyenne avlk tikak thiynwa ee tika hdnkn
-//            eka hadala dannm
+            interiorImageRepo.deleteAll(interiorImageRepo.findByClientEmail(email));
+            colorPalletRepo.deleteAll(colorPalletRepo.findByEmail(email));
+            generateRepo.deleteAll(generateRepo.findByEmail(email));
 
             return ResponseEntity.ok().build();
         }
